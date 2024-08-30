@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>실습해보기3.로켓 setInterval.html</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html{
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      margin: auto;
+    }
+
+    .rocket {
+      position: absolute;
+      width: 100px;
+      height: 150px;
+      bottom: 0;
+    }
+
+    .text {
+      margin-top: -5rem;
+      font-size: 5rem;
+      font-weight: 100;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <img class="rocket" src="./img/rocket.png" alt="로켓">
+  <div class="text">yPos</div>
+
+  <script>
+    const rocket = document.querySelector(".rocket");
+    const text = document.querySelector(".text");
+    let yPos = 0; //로켓 y값
+
+    const render = () => {
+      text.textContent = yPos;
+      // translateY : 요소를 세로로 이동(+: 아래, -: 위)
+      rocket.style.transform = `translateY(${-yPos}px)`;
+      yPos += 2; // 스피드 값 
+      if (yPos > 500) clearInterval(goRocket);
+    }
+
+    let goRocket = setInterval(render, 1.5);
+
+    window.addEventListener("click", () => {
+      clearInterval(goRocket);
+      -webkitclearInterval(goRocket);
+      -mozclearInterval(goRocket);
+    });
+  </script>
+</body>
+
+</html>

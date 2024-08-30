@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실습해보기2.setInterval() 함수</title>
+
+  <style type="text/css">
+    .toggle {
+      width: 200px;
+      height: 200px;
+      background: red;
+      text-align: center;
+      line-height: 200px;
+      font-size: 70px;
+    }
+  </style>
+</head>
+
+<body>
+  <p>
+    <input type="button" value="start" />
+    <input type="button" value="stop" />
+  </p>
+  <div class="toggle" id="toggle">
+    짠!
+  </div>
+
+  <script type="text/javascript">
+
+    // const toggle = document.querySelector(".toggle");
+    // const toggle_css = window.getComputedStyle(toggle);
+    // let toggle_color = toggle_css.getPropertyValue("background-color");
+
+    // const changeColor = setInterval((() =>{ 
+    //   let toggle_color = toggle_css.getPropertyValue("background-color");
+    //  if(toggle_color == "rgb(255, 0, 0)"){
+    //   toggle.style.background = "rgb(255, 255, 0)";
+    //  }else if(toggle_color == "rgb(255, 255, 0)"){
+    //   toggle.style.background = "rgb(255, 0, 0)";
+    //  }
+    // }),500);
+
+    // document.querySelectorAll("button").forEach("click",()=> {})
+    const changeBox = document.getElementById("toggle");
+
+    let handler = null; // setInterval 감지
+    let toggleColor = false;
+
+
+    let startInterval = () => {
+      if (handler == null) {
+        handler = setInterval(() => { toggleBg() }, 500);
+      } else {
+        alert("실행 중");
+      }
+    }
+
+    const toggleBg = () => {
+      //빨강 <=> 노랑
+      changeBox.style.background = toggleColor ? "red" : "yellow";
+      toggleColor = !toggleColor;
+    }
+
+    document.querySelectorAll("input").forEach((el) => {
+      el.addEventListener("click", () => {
+        if (el.value == "start") {
+          startInterval();
+        } else {
+          clearInterval(handler);
+          handler = null;
+        }
+      });
+    });
+
+    window.onload = () => startInterval();
+
+  </script>
+</body>
+
+</html>
