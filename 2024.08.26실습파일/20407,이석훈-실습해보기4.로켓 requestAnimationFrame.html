@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>실습해보기4.로켓 requestAnimationFrame..html</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+   html {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      margin: auto;
+    }
+
+    .rocket {
+      position: absolute;
+      width: 100px;
+      height: 150px;
+      bottom: 0;
+      left: calc(50% - 50px);
+    }
+
+    .text {
+      margin-top: -5rem;
+      font-size: 5rem;
+      font-weight: 100;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <img class="rocket" src="./img/rocket.png" alt="로켓">
+  <div class="text">yPos</div>
+
+  <script>
+
+    const rocket = document.querySelector(".rocket");
+    const text = document.querySelector(".text");
+    let yPos = 0; //로켓 y값
+
+    let goRocket;
+
+    const render2 = () => {
+      text.textContent = yPos;
+      rocket.style.transform = `translateY(${-yPos}px)`;
+      yPos += 2;
+ 
+      goRocket = requestAnimationFrame(render2);
+
+      if(yPos > 500){
+        cancelAnimationFrame(goRocket);
+        -webkitCancelAnimationFrame(goRocket);
+        -mozcancelAnimationFrame(goRocket);
+      }
+    };
+
+    render2();
+    window.addEventListener("click", () => {
+      cancelAnimationFrame(goRocket);
+        -webkitCancelAnimationFrame(goRocket);
+        -mozcancelAnimationFrame(goRocket);
+    });
+
+  </script>
+</body>
+
+</html>

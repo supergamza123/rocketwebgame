@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <title>실습해보기1.setInterval()&clearInterval()</title>
+  <style>
+    h2 {
+      text-align: center;
+    }
+
+    .wrap {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    button {
+      width: 100px;
+      height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>setInterval과 clearInterval</h2>
+  <hr>
+  <div class="wrap">
+    <button>STOP</button>
+    <button>RESTART</button>
+  </div>
+  <script>
+
+    /**
+     * setInterval : 타임아웃 코드를 반복 실행
+     * setInterval(function(){}, 반복할 시간(ms));
+     * 
+    */
+
+    let count = 0;
+    let countDownTimer = setInterval("console.log(count++)",1000);
+    let flag = true; // 실행 중임을 판단하는 함수
+
+    document.querySelectorAll("button").forEach((el, idx) =>{
+      el.addEventListener("click", ()=> {
+        if(idx == 0) {
+          clearInterval(countDownTimer);
+          if(flag){
+            console.log("--STOP--");
+            flag = false;
+          }else {
+            alert("현재 STOP 상태");
+          }
+        }else {
+          // stop 상태일 때 만 가능
+          if(!flag) {
+            console.log("--RESTART--");
+            countDownTimer = setInterval("console.log(count++)", 1000);
+            flag = true;
+          }else {
+            alert("실행 중으로 STOP 후에 실행 가능");
+          }
+        }
+      });
+    });
+
+    // var countNum = setInterval(()=>{
+    //   console.log(count);
+    //   count += 1;
+    //  },1000);
+  
+    // document.querySelectorAll("button")[0].addEventListener("click",()=>{
+    //   clearInterval(countNum);
+    //   console.log("--STOP--");
+    // });
+
+
+    // document.querySelectorAll("button")[1].addEventListener("click",function(){
+    //   console.log("--RESTART--");
+    //   countNum();
+    // });
+
+
+  </script>
+</body>
+
+</html>
